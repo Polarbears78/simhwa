@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>심화과학반 탐구 성찰 설문</title>
+<meta name="description" content="심화과학반 활동 성찰 설문. 입력 후 PDF로 저장.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ground:#eef1ea;
+    --paper:#fffefb;
+    --ink:#26312a;
+    --sub:#5b6b5e;
+    --line:#d7dccb;
+    --accent:#2f6f4f;
+    --accent-soft:#e4efe4;
+    --danger:#a4322a;
+    --shadow: 0 18px 44px -22px rgba(38,49,42,.35), 0 2px 8px rgba(38,49,42,.08);
+    --radius:10px;
+    --serif:"Gowun Batang","Noto Serif KR",serif;
+    --sans:"Noto Sans KR","맑은 고딕",Malgun Gothic,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--ground); color:var(--ink); font-family:var(--sans);
+    font-size:15px; line-height:1.65; -webkit-font-smoothing:antialiased;
+    padding:28px 16px 90px;
+  }
+  .topbar{
+    max-width:760px; margin:0 auto 18px; display:flex; align-items:center;
+    justify-content:space-between; gap:12px; flex-wrap:wrap;
+  }
+  .brand{display:flex; align-items:center; gap:10px;}
+  .brand-mark{
+    width:34px;height:34px;border-radius:8px;background:var(--accent);
+    display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--serif);
+    font-weight:700;font-size:16px;flex:none;
+  }
+  .brand-text{font-size:13px;color:var(--sub);}
+  .actions{display:flex; gap:8px; flex-wrap:wrap;}
+  button{
+    font-family:var(--sans); font-size:13.5px; font-weight:600; cursor:pointer;
+    border-radius:8px; border:1px solid var(--line); background:#fff; color:var(--ink);
+    padding:9px 14px; transition:transform .12s ease, box-shadow .12s ease, background .12s ease;
+  }
+  button:hover{ box-shadow:0 4px 12px -6px rgba(38,49,42,.4); }
+  button:active{ transform:translateY(1px); }
+  button:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+  .btn-primary{ background:var(--accent); border-color:var(--accent); color:#fff; }
+  .btn-ghost{ background:transparent; }
+  .btn-danger{ color:var(--danger); border-color:#e4c9c5; background:#fff; }
+  .btn-small{ padding:5px 10px; font-size:12.5px; border-radius:6px; }
+
+  .sheet{
+    max-width:760px; margin:0 auto; background:var(--paper); border-radius:var(--radius);
+    box-shadow:var(--shadow); border:1px solid var(--line); overflow:hidden;
+  }
+  .sheet-header{
+    padding:34px 40px 22px; text-align:center; border-bottom:1px solid var(--line);
+    background: linear-gradient(180deg, var(--accent-soft), transparent 70%);
+  }
+  .eyebrow{
+    font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--accent); margin:0 0 8px;
+  }
+  h1{ font-family:var(--serif); font-weight:700; font-size:26px; margin:0 0 6px; text-wrap:balance; letter-spacing:-.2px; }
+  .lede{ color:var(--sub); font-size:13.6px; margin:0; }
+
+  .meta-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:0; border-bottom:1px solid var(--line); }
+  .meta-cell{ padding:12px 16px; border-right:1px solid var(--line); border-top:1px solid var(--line); }
+  .meta-cell:nth-child(3n){ border-right:none; }
+  .meta-cell label{ display:block; font-size:11px; color:var(--sub); margin-bottom:4px; letter-spacing:.02em; }
+  .meta-cell input{ width:100%; border:none; background:transparent; font-family:var(--sans); font-size:14.5px; color:var(--ink); padding:2px 0; border-bottom:1px dashed transparent; }
+  .meta-cell input:focus{ outline:none; border-bottom-color:var(--accent); }
+
+  .guide{ padding:22px 40px; border-bottom:1px solid var(--line); }
+  .guide-box{
+    background:var(--accent-soft); border:1px solid #cfe2ce; border-radius:8px;
+    padding:13px 16px; font-size:13.3px; color:#2b3d2e;
+  }
+
+  section.qblock{ padding:24px 40px; border-bottom:1px solid var(--line); }
+  section.qblock:last-of-type{ border-bottom:none; }
+  .qblock .qhead{ display:flex; gap:10px; align-items:baseline; margin-bottom:5px; }
+  .qblock .num{
+    font-family:var(--mono); font-size:12px; color:#fff; background:var(--accent);
+    border-radius:5px; padding:1px 7px; flex:none;
+  }
+  .qblock h2{ font-family:var(--serif); font-size:16.5px; margin:0; font-weight:700; text-wrap:balance; }
+  .qblock .desc{ color:var(--sub); font-size:12.6px; margin:0 0 10px; padding-left:34px; }
+
+  textarea{
+    width:100%; border:1px solid var(--line); border-radius:7px; background:#fffefc;
+    font-family:var(--sans); font-size:14px; color:var(--ink); padding:11px 13px;
+    resize:vertical; line-height:1.65;
+  }
+  textarea:focus{ outline:none; border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft); }
+
+  .footer-note{ padding:20px 40px 30px; font-size:11.5px; color:var(--sub); text-align:center; line-height:1.7; }
+  .status{ max-width:760px; margin:10px auto 0; font-size:12px; color:var(--sub); text-align:right; font-family:var(--mono); }
+  .status.saved{ color:var(--accent); }
+  .print-hint{ max-width:760px; margin:0 auto; font-size:12.5px; color:var(--sub); text-align:right; }
+  .frame-warn{
+    max-width:760px; margin:0 auto 10px; background:#fff4e0; border:1px solid #e8c27a;
+    color:#7a4d06; font-size:12.8px; line-height:1.6; border-radius:8px; padding:10px 14px;
+  }
+  .frame-warn[hidden]{ display:none !important; }
+  .mail-cta{
+    padding:22px 40px 30px; text-align:center; border-top:1px solid var(--line);
+  }
+  .mail-hint{ font-size:12px; color:var(--sub); margin:0 0 10px; line-height:1.6; }
+  .mail-row{
+    display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap;
+  }
+  .mail-address{
+    font-family:var(--mono); font-size:14px; background:var(--accent-soft); color:#2b3d2e;
+    border:1px solid #cfe2ce; border-radius:7px; padding:8px 12px; user-select:all;
+  }
+  .mail-copied{ font-size:12px; color:var(--accent); margin:8px 0 0; }
+  .mail-copied[hidden]{ display:none !important; }
+
+  @media (max-width:600px){
+    section.qblock, .guide, .sheet-header{ padding-left:20px; padding-right:20px; }
+    .qblock .desc{ padding-left:0; }
+    .meta-grid{ grid-template-columns:1fr; }
+    .meta-cell{ border-right:none !important; }
+    h1{ font-size:21px; }
+  }
+
+  @media print{
+    *{ -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; color-adjust:exact !important; }
+    body{ background:#fff !important; padding:0; }
+    .no-export{ display:none !important; }
+    .sheet{ box-shadow:none; border:none; max-width:none; }
+    section.qblock, .meta-grid, .sheet-header{ break-inside:avoid; }
+    textarea{ border:1px solid var(--line) !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar no-export">
+  <div class="brand">
+    <div class="brand-mark">S</div>
+    <div class="brand-text">심화과학반 · 활동 성찰 설문</div>
+  </div>
+  <div class="actions">
+    <button class="btn-ghost btn-small" id="loadBtn" type="button">불러오기</button>
+    <button class="btn-ghost btn-small btn-danger" id="clearBtn" type="button">비우기</button>
+    <button class="btn-primary" id="saveBtn" type="button">🖨️ PDF로 저장(인쇄)</button>
+  </div>
+</div>
+<div class="frame-warn no-export" id="frameWarn" hidden>
+  ⚠️ 현재 미리보기 화면에서는 인쇄 창이 뜨지 않을 수 있습니다. 주소창의 링크를 <b>새 브라우저 탭에서 열어</b> 저장해 주세요.
+</div>
+<p class="print-hint no-export">저장 버튼을 누르면 인쇄 대화상자가 열립니다 — <b>프린터를 "PDF로 저장"</b>으로 선택하고 저장하세요.<br>버튼을 눌러도 창이 뜨지 않으면, 설문지 화면을 한 번 클릭한 뒤 <b>Ctrl+P</b>(Mac: <b>Cmd+P</b>)를 눌러주세요.</p>
+<div class="status no-export" id="status">아직 저장된 임시 기록이 없습니다.</div>
+
+<div class="sheet" id="report">
+
+  <div class="sheet-header">
+    <p class="eyebrow">Self-Reflection · 심화과학반</p>
+    <h1>심화과학반 활동 성찰 설문지</h1>
+    <p class="lede">이번 학기 활동을 돌아보는 성찰 설문입니다</p>
+  </div>
+
+  <div class="meta-grid">
+    <div class="meta-cell"><label>학번</label><input type="text" data-key="studentId" placeholder="예) 20101"></div>
+    <div class="meta-cell"><label>이름</label><input type="text" data-key="name" placeholder="예) 홍길동"></div>
+    <div class="meta-cell"><label>작성 일자 / 학기</label><input type="text" data-key="date" placeholder="예) 2026-08-28 / 2학기"></div>
+  </div>
+
+  <div class="guide">
+    <div class="guide-box">
+      이 설문지는 이번 학기 심화과학반 활동을 돌아보는 성찰 설문입니다.
+      단순히 '참여했다'는 결과보다는, <b>'어떤 호기심으로 시작해서 → 어떤 과정을 거쳐 → 어떤 문제를 해결하고 → 무엇을 배우고 성장했는지'</b>
+      구체적인 팩트와 고민의 과정이 잘 드러나게 작성해 주세요.
+    </div>
+  </div>
+
+  <section class="qblock">
+    <div class="qhead"><span class="num">01</span><h2>이번 학기 심화과학반에서 진행한 활동 중, 본인이 가장 주도적으로 참여했거나 기억에 남는 탐구 주제는 무엇인가요?</h2></div>
+    <p class="desc">구체적인 프로젝트나 실험명을 적어주세요. (예: 감귤젤리의 구연산을 활용한 신장결석 억제 연구, MBL 센서를 활용한 교내 생태계 데이터 수집 등)</p>
+    <textarea rows="3" data-key="q1" placeholder="예) 감귤젤리의 구연산을 활용한 신장결석 억제 연구"></textarea>
+  </section>
+
+  <section class="qblock">
+    <div class="qhead"><span class="num">02</span><h2>위 탐구 주제를 선정하게 된 구체적인 동기나 계기는 무엇인가요?</h2></div>
+    <p class="desc">수업 시간에 배운 내용 중 생긴 의문, 평소 가졌던 호기심, 관련 도서나 기사, 뉴스 등 본인만의 구체적인 출발점을 적어주세요.</p>
+    <textarea rows="4" data-key="q2" placeholder="어떤 계기로 이 주제를 선택하게 되었는지 구체적으로 작성해 주세요."></textarea>
+  </section>
+
+  <section class="qblock">
+    <div class="qhead"><span class="num">03</span><h2>해당 탐구(실험) 과정에서 본인이 구체적으로 맡은 역할은 무엇이었으며, 팀의 결과물에 어떤 기여를 했나요?</h2></div>
+    <p class="desc">실험 설계, 센서 데이터 수집, 데이터 분석 및 시각화, 문헌 조사 등 본인의 실질적인 기여도를 구체적으로 작성해 주세요.</p>
+    <textarea rows="4" data-key="q3" placeholder="맡은 역할과 실제로 한 일을 구체적으로 작성해 주세요."></textarea>
+  </section>
+
+  <section class="qblock">
+    <div class="qhead"><span class="num">04</span><h2>탐구를 진행하기 위해 새롭게 찾아보거나 스스로 학습한 개념/이론/기기 사용법(기술)이 있다면 무엇인가요?</h2></div>
+    <textarea rows="4" data-key="q4" placeholder="스스로 찾아보거나 학습한 개념·이론·기기 사용법을 작성해 주세요."></textarea>
+  </section>
+
+  <section class="qblock">
+    <div class="qhead"><span class="num">05</span><h2>실험이나 프로젝트를 진행하면서 예상치 못한 변수나 실패, 혹은 어려움이 있었나요?</h2></div>
+    <p class="desc">완벽한 실험은 없습니다. 사소한 변수나 예상과 다르게 나온 결과, 기기 조작의 어려움 등을 솔직하게 적어주세요.</p>
+    <textarea rows="4" data-key="q5" placeholder="겪었던 변수, 실패, 어려움을 솔직하게 작성해 주세요."></textarea>
+  </section>
+
+  <section class="qblock">
+    <div class="qhead"><span class="num">06</span><h2>위 문항에서 언급한 어려움을 해결하기 위해 본인(또는 팀)은 어떤 논리적 접근이나 수정된 실험 방법을 시도했나요?</h2></div>
+    <p class="desc">(예: 대조군 설정의 오류를 발견하고 조건을 통제하여 재실험함, 데이터 노이즈를 줄이기 위해 측정 방식을 변경함 등) 어떻게 극복했는지 그 과정을 적어주세요. 가장 중요하게 다뤄주세요.</p>
+    <textarea rows="5" data-key="q6" placeholder="문제를 어떻게 진단하고, 어떤 방법으로 해결을 시도했는지 과정 중심으로 작성해 주세요."></textarea>
+  </section>
+
+  <section class="qblock">
+    <div class="qhead"><span class="num">07</span><h2>탐구 결과를 바탕으로 도출한 결론이나 새롭게 알게 된 과학적 사실은 무엇인가요?</h2></div>
+    <textarea rows="4" data-key="q7" placeholder="탐구를 통해 얻은 결론이나 새롭게 알게 된 사실을 작성해 주세요."></textarea>
+  </section>
+
+  <section class="qblock">
+    <div class="qhead"><span class="num">08</span><h2>이번 심화과학반 활동을 통해 본인의 과학적 탐구 역량(사고력, 실험 기법, 데이터 분석력 등)이 어떻게 성장했다고 생각하나요?</h2></div>
+    <textarea rows="4" data-key="q8" placeholder="활동 전후로 달라진 점, 스스로 느끼는 성장 지점을 작성해 주세요."></textarea>
+  </section>
+
+  <section class="qblock">
+    <div class="qhead"><span class="num">09</span><h2>이번 탐구에서 아쉬웠던 점이나, 이 주제와 관련하여 앞으로 더 깊이 알아보고 싶은 '후속 탐구 주제'가 있다면 무엇인가요?</h2></div>
+    <textarea rows="4" data-key="q9" placeholder="아쉬웠던 점과, 더 알아보고 싶은 후속 탐구 주제를 작성해 주세요."></textarea>
+  </section>
+
+  <div class="footer-note">
+    작성 내용은 <b>실제 있었던 사실</b>만 작성해 주기 바랍니다.<br>
+    심화과학반
+  </div>
+
+  <div class="mail-cta no-export">
+    <p class="mail-hint">위 "PDF로 저장(인쇄)"으로 먼저 저장한 뒤, 아래 버튼으로 선생님 이메일 주소를 복사해서 학생 본인 이메일로 PDF 파일을 첨부해 보내주세요.</p>
+    <div class="mail-row">
+      <span class="mail-address" id="mailAddress">chemtkim@naver.com</span>
+      <button class="btn-primary" id="mailBtn" type="button">📋 이메일 주소 복사</button>
+    </div>
+    <p class="mail-copied" id="mailCopied" hidden>복사되었습니다 — 이메일 앱에서 붙여넣기(Ctrl/Cmd+V) 해주세요.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var STORAGE_KEY = "reflectionSurvey_v1";
+  var statusEl = document.getElementById("status");
+  var report = document.getElementById("report");
+
+  /* 이 페이지가 다른 화면(미리보기 등) 안에 끼워져 열린 경우, 인쇄가 막힐 수 있으므로 안내 */
+  try{
+    if (window.self !== window.top){
+      var fw = document.getElementById("frameWarn");
+      if (fw) fw.hidden = false;
+    }
+  }catch(e){
+    var fw2 = document.getElementById("frameWarn");
+    if (fw2) fw2.hidden = false;
+  }
+
+  function collect(){
+    var fields = {};
+    Array.prototype.forEach.call(report.querySelectorAll("[data-key]"), function(el){
+      fields[el.getAttribute("data-key")] = el.value;
+    });
+    return { fields: fields, savedAt: new Date().toISOString() };
+  }
+
+  var saveTimer = null;
+  function scheduleAutosave(){ clearTimeout(saveTimer); saveTimer = setTimeout(autosave, 500); }
+
+  function autosave(){
+    try{
+      var data = collect();
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      statusEl.textContent = "이 브라우저에 자동 저장됨 · " + new Date(data.savedAt).toLocaleTimeString("ko-KR");
+      statusEl.classList.add("saved");
+    }catch(e){
+      statusEl.textContent = "자동 저장 실패 — PDF로 저장해 두세요.";
+      statusEl.classList.remove("saved");
+    }
+  }
+
+  function applyData(data){
+    if (!data) return;
+    Array.prototype.forEach.call(report.querySelectorAll("[data-key]"), function(el){
+      var key = el.getAttribute("data-key");
+      if (key in data.fields) el.value = data.fields[key];
+    });
+    statusEl.textContent = "불러온 기록 · 저장 시각 " + (data.savedAt ? new Date(data.savedAt).toLocaleString("ko-KR") : "-");
+    statusEl.classList.add("saved");
+  }
+
+  document.getElementById("loadBtn").addEventListener("click", function(){
+    try{
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw){ alert("저장된 임시 기록이 없습니다."); return; }
+      applyData(JSON.parse(raw));
+    }catch(e){ alert("불러오기에 실패했습니다."); }
+  });
+
+  document.getElementById("clearBtn").addEventListener("click", function(){
+    if (!confirm("입력한 내용을 모두 비울까요? (저장된 임시 기록은 유지됩니다)")) return;
+    Array.prototype.forEach.call(report.querySelectorAll("[data-key]"), function(el){ el.value = ""; });
+  });
+
+  Array.prototype.forEach.call(report.querySelectorAll("[data-key]"), function(el){
+    el.addEventListener("input", scheduleAutosave);
+    el.addEventListener("change", scheduleAutosave);
+  });
+
+  try{
+    var existing = localStorage.getItem(STORAGE_KEY);
+    if (existing) applyData(JSON.parse(existing));
+  }catch(e){ /* ignore */ }
+
+  document.getElementById("saveBtn").addEventListener("click", function(){
+    var name = (document.querySelector('[data-key="name"]').value || "학생").replace(/[\\/:*?"<>|]/g, "").trim();
+    var sid = (document.querySelector('[data-key="studentId"]').value || "").replace(/[\\/:*?"<>|]/g, "").trim();
+    var filename = "성찰설문_" + (sid ? sid + "_" : "") + name;
+
+    autosave();
+    var originalTitle = document.title;
+    document.title = filename;
+    window.print();
+    setTimeout(function(){ document.title = originalTitle; }, 500);
+  });
+
+  /* ---------- 이메일 주소 복사 (아티팩트 미리보기에서는 mailto: 이동이 막혀 복사 방식 사용) ---------- */
+  document.getElementById("mailBtn").addEventListener("click", function(){
+    var email = "chemtkim@naver.com";
+    var copiedEl = document.getElementById("mailCopied");
+    var btn = this;
+
+    function showCopied(){
+      copiedEl.hidden = false;
+      var original = btn.textContent;
+      btn.textContent = "✅ 복사됨";
+      setTimeout(function(){
+        btn.textContent = original;
+        copiedEl.hidden = true;
+      }, 2500);
+    }
+
+    function fallbackCopy(){
+      try{
+        var addrEl = document.getElementById("mailAddress");
+        var range = document.createRange();
+        range.selectNodeContents(addrEl);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        var ok = document.execCommand("copy");
+        sel.removeAllRanges();
+        if (ok){ showCopied(); return; }
+      }catch(e){ /* ignore */ }
+      alert("자동 복사에 실패했습니다. 이메일 주소(" + email + ")를 직접 선택해서 복사해 주세요.");
+    }
+
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(email).then(showCopied).catch(fallbackCopy);
+    } else {
+      fallbackCopy();
+    }
+  });
+})();
+</script>
+</body>
+</html>
